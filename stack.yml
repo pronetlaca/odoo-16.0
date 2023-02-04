@@ -1,0 +1,35 @@
+version: '3.5'
+services:
+  web:
+    image: odoo:16.0
+    depends_on:
+      - db
+    ports:
+      - "8099:8069"
+    entrypoint:
+      - odoo
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+    networks:
+      - webnet_v2
+
+  db_v:
+    image: postgres:12
+    ports:
+      - "6432:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data/pgdata
+    networks:
+      - webnet_v2
+volumes:
+  odoo-web-data:
+  odoo-db-dara:
+networks:
+  webnet_v2:
