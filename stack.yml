@@ -15,7 +15,7 @@ services:
     networks:
       - webnet_v2
 
-  db_v:
+  db:
     image: postgres:12
     ports:
       - "6432:5432"
@@ -30,6 +30,6 @@ services:
       - webnet_v2
 volumes:
   odoo-web-data:
-  odoo-db-dara:
+  odoo-db-data:
 networks:
   webnet_v2:
